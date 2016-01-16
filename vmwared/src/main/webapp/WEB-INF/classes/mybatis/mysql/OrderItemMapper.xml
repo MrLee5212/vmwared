@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.utron.yw.dao.OrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.utron.yw.model.OrderItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="item_level1_id" property="itemLevel1Id" jdbcType="INTEGER" />
+    <result column="item_level2_id" property="itemLevel2Id" jdbcType="INTEGER" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="qty" property="qty" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="freebie" property="freebie" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_id, item_level1_id, item_level2_id, item_id, qty, amount, freebie
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.utron.yw.model.OrderItem" >
+    insert into t_order_item (id, order_id, item_level1_id, 
+      item_level2_id, item_id, qty, 
+      amount, freebie)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{itemLevel1Id,jdbcType=INTEGER}, 
+      #{itemLevel2Id,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{qty,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DECIMAL}, #{freebie,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.utron.yw.model.OrderItem" >
+    insert into t_order_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="itemLevel1Id != null" >
+        item_level1_id,
+      </if>
+      <if test="itemLevel2Id != null" >
+        item_level2_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="qty != null" >
+        qty,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="freebie != null" >
+        freebie,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="itemLevel1Id != null" >
+        #{itemLevel1Id,jdbcType=INTEGER},
+      </if>
+      <if test="itemLevel2Id != null" >
+        #{itemLevel2Id,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="freebie != null" >
+        #{freebie,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.utron.yw.model.OrderItem" >
+    update t_order_item
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="itemLevel1Id != null" >
+        item_level1_id = #{itemLevel1Id,jdbcType=INTEGER},
+      </if>
+      <if test="itemLevel2Id != null" >
+        item_level2_id = #{itemLevel2Id,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="qty != null" >
+        qty = #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="freebie != null" >
+        freebie = #{freebie,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.utron.yw.model.OrderItem" >
+    update t_order_item
+    set order_id = #{orderId,jdbcType=INTEGER},
+      item_level1_id = #{itemLevel1Id,jdbcType=INTEGER},
+      item_level2_id = #{itemLevel2Id,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      qty = #{qty,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      freebie = #{freebie,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
